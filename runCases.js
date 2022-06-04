@@ -1,4 +1,4 @@
-function test(method, cases) {
+function runCases(method, cases) {
   describe(method.name, () => {
     cases.trim().split('\n').forEach(line => {
       const [input, output] = line.split(' ')
@@ -7,4 +7,4 @@ function test(method, cases) {
   })
 }
 
-module.exports = test
+module.exports = runCases
