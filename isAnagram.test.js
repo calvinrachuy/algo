@@ -14,10 +14,11 @@ function isAnagram(a, b) {
 
 
 function isAnagramCharCounts(a, b) {
+  if (a.length !== b.length) return false
 
   function createCounts(string) {
     const counts = {}
-    for (const c of string) {
+    for(const c of string) {
       if (!(c in counts)) counts[c] = 0
       counts[c]++
     }
@@ -27,7 +28,10 @@ function isAnagramCharCounts(a, b) {
   const countsA = createCounts(a)
   const countsB = createCounts(b)
   
-  return Object.keys(countsA).every(k => countsA[k] === countsB[k])
+  for(const k of Object.keys(countsA)) {
+    if (countsB[k] !== countsA[k]) return false
+  }
+  return true
 }
 // Time
 // 2a + b => n + m
@@ -43,16 +47,25 @@ const cases = [
   ['restful', 'fluster', true],
   ['cats', 'cats', true],
   ['cats', 'tacs', true],
-  ['cats', 'cots', false]
-  ['cats', 'cots', false]
+  ['cats', 'cots', false],
+  ['cats', 'cots', false],
+  ['tax', 'taxi', false],
+  ['taxi', 'tax', false],
+]
+
+const methods = [
+  isAnagram,
+  isAnagramCharCounts,
 ]
 
 describe('isAnagram', () => {
   it('works', () => {
     expect(isAnagram('restful', 'fluster')).toBe(true)
     expect(isAnagram('cats', 'cats')).toBe(true)
-    expect(isAnagram('cats', 'cots')).toBe(false)
     expect(isAnagram('cats', 'tacs')).toBe(true)
+    expect(isAnagram('cats', 'cots')).toBe(false)
+    expect(isAnagram('cats', 'cat')).toBe(false)
+    expect(isAnagram('cat', 'cats')).toBe(false)
   })
 })
 
@@ -60,7 +73,9 @@ describe('isAnagramCharCounts', () => {
   it('works', () => {
     expect(isAnagramCharCounts('restful', 'fluster')).toBe(true)
     expect(isAnagramCharCounts('cats', 'cats')).toBe(true)
-    expect(isAnagramCharCounts('cats', 'cots')).toBe(false)
     expect(isAnagramCharCounts('cats', 'tacs')).toBe(true)
+    expect(isAnagramCharCounts('cats', 'cots')).toBe(false)
+    expect(isAnagramCharCounts('cats', 'cat')).toBe(false)
+    expect(isAnagramCharCounts('cat', 'cats')).toBe(false)
   })
 })
