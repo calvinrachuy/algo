@@ -26,4 +26,37 @@ function runCases(method, cases) {
   })
 }
 
+/*
+// In Browser //
+function average(numberArray) {
+  const sum = numberArray.reduce((a, b) => a + b, 0)
+  const quotient = sum / numberArray.length
+  return quotient
+}
+
+const cases = [
+  {
+    method: average,
+    input: [[1,3,5]],
+    output: 3,
+  },
+  
+  {
+    method: average,
+    input: [[4,5]],
+    output: 4.5,
+  },
+]
+
+console.info('running tests')
+for (const {method, input, output} of cases) {
+  const actual = method(...input)
+    console.assert(
+      actual === output,
+      `${method.name}([${input}]) -> Expected: ${output}, Actual: ${actual}`
+    )
+  }
+}
+*/
+
 module.exports = runCases
