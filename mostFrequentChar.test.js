@@ -21,3 +21,9 @@ function mostFrequentChar(string) {
   }
   return maxChar
 }
+
+describe('mostFrequentChar', () => {
+  test('baacbaazde', () => {
+    expect(mostFrequentChar('baacbaazde')).toBe('a')
+  })
+})

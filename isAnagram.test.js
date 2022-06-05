@@ -41,23 +41,6 @@ function isAnagramCharCounts(a, b) {
 
 // This approach can be modified for n Space
 
-
-
-const cases = [
-  ['restful', 'fluster', true],
-  ['cats', 'cats', true],
-  ['cats', 'tacs', true],
-  ['cats', 'cots', false],
-  ['cats', 'cots', false],
-  ['tax', 'taxi', false],
-  ['taxi', 'tax', false],
-]
-
-const methods = [
-  isAnagram,
-  isAnagramCharCounts,
-]
-
 describe('isAnagram', () => {
   it('works', () => {
     expect(isAnagram('restful', 'fluster')).toBe(true)
