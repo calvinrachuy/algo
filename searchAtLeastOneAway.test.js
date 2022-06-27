@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 search('matt', ['mat', 'bat', 'matte', 'cat', 'mbtt', 'fat', 'baseball']) => ['mat', 'matte', 'mbtt'] 
 
@@ -47,6 +45,12 @@ describe('searchAtLeastOneAway', () => {
   it ('provided test case - matt', () => {
     const actual = searchAtLeastOneAway('matt', ['mat', 'bat', 'matte', 'cat', 'mbtt', 'fat', 'baseball'])
     const expected = ['mat', 'matte', 'mbtt']
+    expect(actual).toStrictEqual(expected)
+  })
+  
+  it ('includes same string', () => {
+    const actual = searchAtLeastOneAway('matt', ['matt', 'mat', 'bat', 'matte', 'cat', 'mbtt', 'fat', 'baseball'])
+    const expected = ['matt', 'mat', 'matte', 'mbtt']
     expect(actual).toStrictEqual(expected)
   })
   
