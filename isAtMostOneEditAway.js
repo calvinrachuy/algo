@@ -1,11 +1,15 @@
 function isAtMostOneEditAway(A, B) {
+  // .. > 1 is more elegant than ! .. <=
   if (Math.abs(A.length - B.length) > 1) return false
   
   let edits = 0
   let a = 0
   let b = 0
   
+  // Corrected < to <=
   while (a <= A.length && b <= B.length) {
+    if (edits > 1) return false
+    
     if (A[a] == B[b]) {
       a++
       b++
