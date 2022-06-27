@@ -1,4 +1,7 @@
 /*
+
+// Notes and psuedocode
+
 search('matt', ['mat', 'bat', 'matte', 'cat', 'mbtt', 'fat', 'baseball']) => ['mat', 'matte', 'mbtt'] 
 
 matt => mit // invalid 
@@ -38,8 +41,6 @@ const isAtMostOneEditAway = require('./isAtMostOneEditAway.js')
 const searchAtLeastOneAway = (searchterm, terms) => {
     return terms.filter(term => isAtMostOneEditAway(searchterm, term))
 }
-
-// searchAtLeastOneAway('matt', ['mat', 'bat', 'matte', 'cat', 'mbtt', 'fat', 'baseball'])
 
 describe('searchAtLeastOneAway', () => {
   it ('provided test case - matt', () => {
