@@ -1,54 +1,70 @@
-const runCases = require('./runCases.js')
+// Compare counts in single loop
 
-/*
-anagrams
-Write a function, anagrams, that takes in two strings as arguments. The function should return a boolean indicating whether or not the strings are anagrams. Anagrams are strings that contain the same characters, but in any order.
-*/
+/**
+ * Runtime: 119 ms, faster than 54.99% of JavaScript online submissions for Valid Anagram.
+ * Memory Usage: 42.3 MB, less than 95.06% of JavaScript online submissions for Valid Anagram.
+ */
 
-function isAnagram(a, b) {
-  const normalize = str => str.trim().toLowerCase().split('').sort().join('')
-  return normalize(a) === normalize(b)
-}
-// Time
-// Roughly 3a + (a log(a)) + 3b + (b lob(b)) => n + n * log(n) + m + m * log(m)
-
-
-function isAnagramCharCounts(a, b) {
-  if (a.length !== b.length) return false
-
-  function createCounts(string) {
-    const counts = {}
-    for(const c of string) {
-      if (!(c in counts)) counts[c] = 0
-      counts[c]++
-    }
-    return counts
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ var isAnagramCharCounts = function(s, t) {
+  if (s.length !== t.length) return false
+  
+  const counts = {}
+  
+  for (let i = 0; i < s.length; i++) {
+      const a = s[i]
+      const b = t[i]
+      if (!(a in counts)) counts[a] = 0
+      if (!(b in counts)) counts[b] = 0
+      counts[a]++
+      counts[b]--
   }
   
-  const countsA = createCounts(a)
-  const countsB = createCounts(b)
-  
-  for(const k of Object.keys(countsA)) {
-    if (countsB[k] !== countsA[k]) return false
+  return Object.values(counts).every(v => v === 0)
+};
+
+/**
+ * Build string of counts
+ * Faster, No sorting
+ * Runtime: 92 ms, faster than 85.20% of JavaScript online submissions for Valid Anagram.
+ * Memory Usage: 44.2 MB, less than 51.08% of JavaScript online submissions for Valid Anagram.
+ */
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ var isAnagramHashString = function(s, t) {
+  return hashWord(s) === hashWord(t)
+};
+
+function hashWord(word) {
+  const counts = {}
+  const letters = 'abcdefghijklmnopqrstuvwxyz'
+  for (const letter of letters) {
+      counts[letter] = 0
   }
-  return true
+  
+  for (const char of word) {
+      counts[char]++
+  }
+
+  return Object.entries(counts).join('')
 }
-// Time
-// 2a + b => n + m
-
-// Space
-// n + m
-
-// This approach can be modified for n Space
 
 describe('isAnagram', () => {
   it('works', () => {
-    expect(isAnagram('restful', 'fluster')).toBe(true)
-    expect(isAnagram('cats', 'cats')).toBe(true)
-    expect(isAnagram('cats', 'tacs')).toBe(true)
-    expect(isAnagram('cats', 'cots')).toBe(false)
-    expect(isAnagram('cats', 'cat')).toBe(false)
-    expect(isAnagram('cat', 'cats')).toBe(false)
+    expect(isAnagramHashString('restful', 'fluster')).toBe(true)
+    expect(isAnagramHashString('cats', 'cats')).toBe(true)
+    expect(isAnagramHashString('cats', 'tacs')).toBe(true)
+    expect(isAnagramHashString('cats', 'cots')).toBe(false)
+    expect(isAnagramHashString('cats', 'cat')).toBe(false)
+    expect(isAnagramHashString('cat', 'cats')).toBe(false)
   })
 })
 
